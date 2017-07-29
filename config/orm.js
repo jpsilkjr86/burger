@@ -1,4 +1,4 @@
-const connection = require('./connection.js');
+var connection = require('./connection.js');
 
 // declares object to be exported
 const orm = {
