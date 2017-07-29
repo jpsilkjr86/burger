@@ -21,4 +21,15 @@ $(document).ready(function(){
 		});
 	});
 
+	// functionality for submitting form to add burgers
+	$('#add-form').on('submit', function(event) {
+		event.preventDefault();
+		$.post('/burgers/new', {
+			burger_name: $('#burger-name').val().trim()
+		}).done(data => {
+			console.log(data);
+			location.reload();
+		});
+	});
+
 });
