@@ -42,7 +42,7 @@ module.exports = (app) => {
 		});
 	});
 	// route for eating
-	app.put('/burgers/eat', (req, res) => {
+	app.post('/burgers/eat', (req, res) => {
 		burger.eat(req.body.burger_name).then(result => {
 			res.send(result);
 		}).catch(err => {
@@ -51,7 +51,7 @@ module.exports = (app) => {
 		});
 	});
 	// route for ordering more
-	app.put('/burgers/ordermore', (req, res) => {
+	app.post('/burgers/ordermore', (req, res) => {
 		burger.orderMore(req.body.burger_name).then(result => {
 			res.send(result);
 		}).catch(err => {
