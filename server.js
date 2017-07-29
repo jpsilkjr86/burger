@@ -21,8 +21,9 @@ app.use(express.static("public"));
 
 // Override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
-var exphbs = require("express-handlebars");
 
+// Imports handlebars and sets it as rendering engine
+var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
