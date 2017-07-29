@@ -1,16 +1,20 @@
 const orm = require('../config/orm.js');
 
-orm.connect().then( () => {
-	console.log('test connection');
 
-	orm.selectAll().then(results => {
-		console.log(results);
-	});
+
+module.exports = orm;
+
+// orm.connect().then( () => {
+// 	console.log('test connection');
+
+// 	orm.selectAll().then(results => {
+// 		console.log(results);
+// 	});
 
 	
 
 		
-});
+// });
 	
 	// orm.updateOne('Angus Burger', false).then(result => {
 	// 	console.log(result);
