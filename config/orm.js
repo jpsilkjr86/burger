@@ -46,7 +46,7 @@ const orm = {
 				}
 				// ensures no duplicate burgers are added to the database
 				if (result.insertId === 0) {
-					return reject('\nBurger already exists!');
+					return reject('\nBurger already exists!\n');
 				}
 				// returns resolve if connection is successful
 				return resolve(result);
@@ -55,7 +55,25 @@ const orm = {
 	},
 	// returns promise which resolves with update of burger row values
 	updateOne: (burger_name, devoured) => {
-
+		return new Promise( (resolve, reject) => {
+			// instantiates locally scoped variables for query. extra ON clause added
+			// to ensure duplicates are not allowed.
+			const queryStr = 'UPDATE burgers SET burger_name = ?, devoured = ?'
+							+ ' WHERE burger_name = ?';
+			const queryValAry = [burger_name, devoured, burger_name];
+			// queries mysql server according to query string and values
+			connection.query(queryStr, queryValAry, (err, result) => {
+				if (err) {
+					return reject('\nServer connection error.\n');
+				}
+				// ensures no duplicate burgers are added to the database
+				if (result.affectedRows === 0) {
+					return reject('\nUnable to locate designated burger.\n');
+				}
+				// returns resolve if connection is successful
+				return resolve(result);
+			});
+		});
 	},
 	// ends connection to mysql server
 	end: () => {
