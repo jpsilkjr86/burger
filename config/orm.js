@@ -52,8 +52,16 @@ const orm = {
 
 	},
 	// ends connection to mysql server
-	quit: () => {
-		
+	end: () => {
+		return new Promise( (resolve, reject) => { 
+			connection.end(function(err) {
+				if (err) {
+					return reject('Error disconnencting: ' + err.stack);
+				}
+				// returns resolve if connection is successful
+				return resolve();
+			});
+		});
 	}
 };
 
