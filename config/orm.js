@@ -33,11 +33,27 @@ const orm = {
 	},
 	// returns promise which resolves with insert of new burger rows into burgers database
 	insertOne: (burger_name) => {
-
+		return new Promise( (resolve, reject) => {
+			// instantiates locally scoped variables for query
+			const queryStr = 'INSERT INTO burgers (??) VALUES (?)';
+			const queryValAry = ['burger_name', burger_name];
+			// queries mysql server according to query string and values
+			connection.query(queryStr, queryValAry, (err, result) => {
+				if (err) {
+					return reject('\nServer connection error.\n');
+				}
+				// returns resolve if connection is successful
+				return resolve(result);
+			});
+		});
 	},
 	// returns promise which resolves with update of burger row values
 	updateOne: (id, burger_name, devoured) => {
 
+	},
+	// ends connection to mysql server
+	quit: () => {
+		
 	}
 };
 
