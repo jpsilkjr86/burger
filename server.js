@@ -1,6 +1,7 @@
 // dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require("method-override");
 
 // imports for connection purposes
 const orm = require('./config/orm.js')
@@ -16,9 +17,14 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 // serves as default
-app.use(express.static("./public"));
+app.use(express.static("public"));
 
+// Override with POST having ?_method=DELETE
+app.use(methodOverride("_method"));
+var exphbs = require("express-handlebars");
 
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // attempts to establish connection to mysql server
 orm.connect().then(() => {
