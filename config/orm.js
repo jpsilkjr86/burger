@@ -34,13 +34,19 @@ const orm = {
 	// returns promise which resolves with insert of new burger rows into burgers database
 	insertOne: (burger_name) => {
 		return new Promise( (resolve, reject) => {
-			// instantiates locally scoped variables for query
-			const queryStr = 'INSERT INTO burgers (??) VALUES (?)';
-			const queryValAry = ['burger_name', burger_name];
+			// instantiates locally scoped variables for query. extra ON clause added
+			// to ensure duplicates are not allowed.
+			const queryStr = 'INSERT INTO burgers (burger_name) VALUES (?)'
+							+ ' ON DUPLICATE KEY UPDATE burger_name = burger_name';
+			const queryValAry = [burger_name];
 			// queries mysql server according to query string and values
 			connection.query(queryStr, queryValAry, (err, result) => {
 				if (err) {
 					return reject('\nServer connection error.\n');
+				}
+				// ensures no duplicate burgers are added to the database
+				if (result.insertId === 0) {
+					return reject('\nBurger already exists!');
 				}
 				// returns resolve if connection is successful
 				return resolve(result);
@@ -48,7 +54,7 @@ const orm = {
 		});
 	},
 	// returns promise which resolves with update of burger row values
-	updateOne: (id, burger_name, devoured) => {
+	updateOne: (burger_name, devoured) => {
 
 	},
 	// ends connection to mysql server
