@@ -1,0 +1,70 @@
+
+<!-- Burger Section Header -->
+<div class="bg-info text-center" style="padding: 5px">
+  <h3>
+    Choose a burger to eat in the right-hand column, or create your own!
+  </h3>
+  <p>
+    NOTE: If you would like to order more of a burger that was already eaten,
+    just click on the "Order More" button!
+  </p>
+</div>  
+
+<!-- Burger Content -->
+<div class="row">
+  <div class="col-xs-6">
+    {{#each eatenBurgers}}
+      <div class="burger-div">
+        <button class="btn btn-warning eat">Eat!</button>
+        <span class="burger-content">Burger: {{this.burger_name}}</span>
+      </div>        
+    {{/each}}
+  </div>
+
+  <div class="col-xs-6">
+    {{#each readyBurgers}}
+      <div class="burger-div">
+        <button class="btn btn-warning eat">Eat!</button>
+        <span class="burger-content">Burger: {{this.burger_name}}</span>
+      </div>        
+    {{/each}}
+  </div>
+</div>
+
+
+<!-- Data gets passed via burgers_controller.js from this point forward. -->
+<!-- <ul>
+  {{#each quotes}}
+  	<li>
+  		<p><span class="label">ID:</span> {{this.id}}</p>
+      <p><span class="label">Quote:</span> {{this.quote}}</p>
+      <p><span class="label">Author:</span> {{this.author}}</p>
+
+      {{!-- Form should send a delete command to the server --}}
+      <form>
+        <input type="hidden" name="id" value="{{this.id}}">
+        <button type="submit">Delete</button>
+      </form>
+
+      <a href="/{{this.id}}">Update this quote</a>
+  	</li>
+  {{/each}}
+</ul> -->
+
+<!-- <h2>Add a Quote</h2>
+
+{{!-- Form should send a post command to the server --}}
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="auth">Author:</label>
+    <input type="text" id="auth" name="author">
+  </div>
+
+  <div class="form-group">
+    <label for="quo">Quote:</label>
+    <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
+  </div>
+
+  <button type="submit">Add Quote</button>
+</form> -->
